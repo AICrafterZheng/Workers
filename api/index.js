@@ -1,6 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-
-export default async function (request: VercelRequest, response: VercelResponse) {
+export default async function (request, response) {
   const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
   const model = 'claude-3-haiku-20240307';
   const maxTokens = 1024;
@@ -33,7 +31,7 @@ export default async function (request: VercelRequest, response: VercelResponse)
   response.status(200).json(responseData);
 }
 
-async function getUserInput(request: VercelRequest): Promise<string> {
+async function getUserInput(request) {
   const { searchParams } = new URL(request.url);
   const userMessage = searchParams.get('message') || '';
   return userMessage;
